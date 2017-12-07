@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Document -- Condition</title>
+  <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+
+  <div id="root">
+    <!-- This element's contents will be replaced with your component -->
+  </div>
+  <script type="text/babel">
+    /*
+      一个元素的key最好是这个元素在列表中拥有的一个独一无二的字符串。通常，我们使用来自数据的id作为元素的key
+      元素的key只有在它和它的兄弟节点对比时才有意义。
+      数组元素中使用的key在其兄弟之间应该是独一无二的。然而，它们不需要是全局唯一的。当我们生成两个不同的数组时，我们可以使用相同的键
+      key会作为给React的提示，但不会传递给你的组件。如果您的组件中需要使用和key相同的值，请将其作为属性传递
+    */
+    function ListItem(props) {
+      // 对啦！这里不需要明确出key:
+      return <li>{props.value}</li>;
+    }
+    
+    function NumberList(props) {
+      const numbers = props.numbers;
+      const listItems = numbers.map((number) =>
+        // 又对啦！key应该在数组中被明确出来
+        <ListItem key={number.toString()}
+                  value={number} />
+      );
+      return (
+        <ul>
+          {listItems}
+        </ul>
+      );
+    }
+    
+    const numbers = [1, 2, 3, 4, 5];
+    ReactDOM.render(
+      <NumberList numbers={numbers} />,
+      document.getElementById('root')
+    );
+
+  </script>
+</body>
+
+</html>
