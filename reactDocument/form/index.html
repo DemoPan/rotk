@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Document -- Condition</title>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <!-- This element's contents will be replaced with your component -->
+    </div>
+    <script type="text/babel">
+    // class NameForm extends React.Component {
+    //     constructor(props) {
+    //         super(props);
+    //         this.state = {value: ''};
+        
+    //         this.handleChange = this.handleChange.bind(this);
+    //         this.handleSubmit = this.handleSubmit.bind(this);
+    //     }
+    
+    //     handleChange(event) {
+    //         this.setState({value: event.target.value});
+    //     }
+    
+    //     handleSubmit(event) {
+    //         console.log('A name was submitted: ' + this.state.value);
+    //         event.preventDefault();
+    //     }
+    
+    //     render() {
+    //         return (
+    //             <form onSubmit={this.handleSubmit}>
+    //             <label>
+    //                 Name:
+    //                 <input type="text" value={this.state.value} onChange={this.handleChange} />
+    //             </label>
+    //             <label>{this.state.value}</label>
+    //             <input type="submit" value="Submit" />
+    //             </form>
+    //         );
+    //     }
+    // }
+
+    // class NameForm extends React.Component {
+    //     constructor(props) {
+    //         super(props);
+    //         this.state = {
+    //             value: 'Please write an essay about your favorite DOM element.'
+    //         };
+
+    //         this.handleChange = this.handleChange.bind(this);
+    //         this.handleSubmit = this.handleSubmit.bind(this);
+    //     }
+
+    //     handleChange(event) {
+    //         this.setState({value: event.target.value});
+    //     }
+
+    //     handleSubmit(event) {
+    //         console.log('An essay was submitted: ' + this.state.value);
+    //         event.preventDefault();
+    //     }
+
+    //     render() {
+    //         return (
+    //         <form onSubmit={this.handleSubmit}>
+    //             <label>
+    //             Name:
+    //             <textarea value={this.state.value} onChange={this.handleChange} />
+    //             </label>
+    //             <input type="submit" value="Submit" />
+    //         </form>
+    //         );
+    //     }
+    // }
+    
+    class NameForm extends React.Component{
+        constructor(props){
+            super(props);
+
+            this.state = {
+                value: 'Grapefruit'
+            }
+            this.handleChange = this.handleChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleSubmit(event){
+            console.log(this.state.value);
+            event.preventDefault();
+        }
+        handleChange(event){
+            this.setState({value: event.target.value});
+        }
+        render(){
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Pick your favorite La Croix flavor:
+                        <select value={this.state.value} onChange={this.handleChange}>
+                            <option value="grapefruit">Grapefruit</option>
+                            <option value="lime">Lime</option>
+                            <option value="coconut">Coconut</option>
+                            <option value="mango">Mango</option>
+                        </select>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+            )
+        }
+    }
+
+    ReactDOM.render(
+      <NameForm />,
+      document.getElementById('root')
+    );
+
+  </script>
+</body>
+
+</html>
