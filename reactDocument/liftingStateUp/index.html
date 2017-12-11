@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React Document -- Condition</title>
+  <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+
+  <div id="root">
+    <!-- This element's contents will be replaced with your component -->
+  </div>
+  <script type="text/babel">
+    // @Component BoilingVerdict
+    // @Component Calculator
+    // @state temperature
+
+    class BoilingVerdict extends React.Component{
+      render(){
+        if(this.props.temperature >= 100){
+          return <div>水开了</div>
+        }else{
+          return <div>水没开</div>
+        }
+      }
+    }
+
+    class Calculator extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          temperature: 0
+        };
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+      handleChange(event){
+        this.setState({
+          temperature: event.target.value
+        });
+      }
+
+      render(){
+        return(
+          <fieldset>
+            <label>
+              input temperature:
+              <input name="temperature" value={this.state.temperature} onChange={this.handleChange}/>
+            </label>
+            <BoilingVerdict temperature={this.state.temperature}/>
+          </fieldset>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Calculator />,
+      document.getElementById("root")
+    )
+
+  </script>
+</body>
+
+</html>

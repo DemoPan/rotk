@@ -126,12 +126,16 @@
                 numberOfGuests: 2
             };
 
+            this.handleSubmit = this.handleSubmit.bind(this);
             this.handleInputChange = this.handleInputChange.bind(this);
         }
 
         handleSubmit(event){
-            console.log('');
+            console.log('isGoing:' + (this.state.isGoing ? "true":"false"));
+            console.log('Number of guests:' + this.state.numberOfGuests);
+            event.preventDefault();
         }
+
         handleInputChange(event) {
             const target = event.target;
             const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -162,11 +166,11 @@
                         value={this.state.numberOfGuests}
                         onChange={this.handleInputChange} />
                     </label>
+                    <input type="submit" value="Submit" />
                 </form>
             );
         }
     }
-
 
     ReactDOM.render(
       <NameForm />,
