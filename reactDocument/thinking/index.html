@@ -45,11 +45,11 @@
       }
     }
 
-    class Filter extends React.Component{
+    class Filter extends React.Component{//注意这里是onClick, 不是handleFliter
       render(){
         return(
           <div>
-            <input type="CheckBox" onClick={this.props.handleFilter}/>
+            <input type="checkbox" onClick={this.props.onClick} checked={this.props.isCheck}/>
             <label>Only show products in stock</label>
           </div>
         )
@@ -86,8 +86,16 @@
       render(){
         var rows = [],
           datas = this.props.Datas;
-        datas.forEach((data) => 
-          rows.push(<Row data={data} key={data.name} />)
+        
+        datas.forEach((data) => {
+            if(!this.props.isCheck){
+              rows.push(<Row data={data} key={data.name} />)
+            }else{
+              if(data.stocked){
+                rows.push(<Row data={data} key={data.name} />)
+              }
+            }
+          }
         )
         return(
           <tbody>{rows}</tbody>
@@ -126,16 +134,15 @@
 
       handleFilter(event){
         this.setState({
-          isCheck: event.target.isCheck ? true : fasle
+          isCheck: event.target.checked
         });
-        event.preventDefault();
       }
 
       render(){
         return(
           <div>
             <Search onChange={this.handleChange} />
-            <Filter onClick={this.handleFilter} />
+            <Filter onClick={this.handleFilter} isCheck={this.state.isCheck}/>
             <List Datas={this.props.Datas} isCheck={this.state.isCheck} textFill={this.state.textFill} />
           </div>
         )
